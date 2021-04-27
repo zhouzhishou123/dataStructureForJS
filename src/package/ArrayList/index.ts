@@ -32,8 +32,6 @@ class ArrayList<T> {
         for(let i=0;i<this.length;i++){
             newElements[i] = this.elements[i]
         }
-        console.log(oldCapacity, newCapacity, '===9000');
-        
         this.elements = newElements
     }
 

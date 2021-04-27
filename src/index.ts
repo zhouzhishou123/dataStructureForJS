@@ -9,8 +9,8 @@ import ArrayList from './package/ArrayList'
 
 const arrayList = new ArrayList(10)
 
-arrayList.push(1,2,3,4)
-arrayList.push(5,6,7,8,9,10,11)
+arrayList.unshift(1,2,3,4)
+arrayList.unshift(5,6,7,8,9,10,11)
 console.log(arrayList, '===arrayList===');
 
 
