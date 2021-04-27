@@ -22,9 +22,23 @@ class ArrayList<T> {
     private ELEMENT_NOT_FOUND:number = -1
     //数组的容量
     private DEFAULT_CAPACITY: number = 10
+    //动态扩容
+    private ensureCapacity(capacity:number) {
+        const oldCapacity = this.elements.length;
+        if(capacity <= oldCapacity) return
+        // 新容量系数1.5
+        let newCapacity = oldCapacity + (oldCapacity >> 1) 
+        const newElements = new Array(newCapacity)
+        for(let i=0;i<this.length;i++){
+            newElements[i] = this.elements[i]
+        }
+        console.log(oldCapacity, newCapacity, '===9000');
+        
+        this.elements = newElements
+    }
 
     constructor(capacity: number = 10){
-        capacity = capacity >10 ? capacity : this.DEFAULT_CAPACITY
+        capacity = capacity > 10 ? capacity : this.DEFAULT_CAPACITY
         this.elements = new Array(capacity)
     }
    /**
@@ -58,6 +72,7 @@ class ArrayList<T> {
      * @Description: 将一个或多个元素添加到数组的末尾，并返回该数组的新长度(该方法修改原有数组)
      */    
     public push(...args: T[]):number{
+        this.ensureCapacity(this.length + args.length)
         for(let i=0;i<args.length;i++){
             this.elements[this.length++] = args[i];
         }
@@ -70,6 +85,7 @@ class ArrayList<T> {
      * 每次向右整体移动一位
      */    
     public unshift(...args:T[]):number{
+        this.ensureCapacity(this.length + args.length)
         for(let i=0; i<args.length;i++){
             for(let j = this.length; j > 0; j--){
                    this.elements[j] = this.elements[j-1]
