@@ -1,7 +1,7 @@
 /*
  * @Author: zhouzhishou
  * @Date: 2021-04-18 21:05:37
- * @Description: 动态数组接口设计
+ * @Description: 动态数组接口设计 缺点： 造成内存空间的大量浪费
  */
 
 // type IArrayList = {
@@ -27,12 +27,13 @@ class ArrayList<T> {
         const oldCapacity = this.elements.length;
         if(capacity <= oldCapacity) return
         // 新容量系数1.5
-        let newCapacity = oldCapacity + (oldCapacity >> 1) 
+        let newCapacity = oldCapacity + (oldCapacity >> 1)
         const newElements = new Array(newCapacity)
         for(let i=0;i<this.length;i++){
             newElements[i] = this.elements[i]
         }
         this.elements = newElements
+        console.log(`${oldCapacity}扩容为${newCapacity}`);
     }
 
     constructor(capacity: number = 10){
@@ -126,9 +127,9 @@ class ArrayList<T> {
      */ 
     public pop():T{
         let old = this.elements[this.length-1]
-        for(let i=0; i<this.length;i++){
-            this.elements[i] = this.elements[i+1]
-        }
+        // for(let i=0; i<this.length;i++){
+        //     this.elements[i] = this.elements[i+1]
+        // }
         this.length--;
         return old
     }
@@ -161,6 +162,12 @@ class ArrayList<T> {
      * @Description: 清空所有的值
      */    
     public clear():void{
+        /**
+         * 数组中存放引用类型数据时，为防止继续占用内存把引用清空保留数组内存地址的引用
+         */
+        for(let i=0; i<this.length;i++){
+            this.elements[i] = null
+        }
         this.length = 0
     }
 }
