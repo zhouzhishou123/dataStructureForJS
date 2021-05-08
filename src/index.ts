@@ -4,13 +4,3 @@
  * @Description: 
  */
 
-import ArrayList from './package/ArrayList'
-
-
-const arrayList = new ArrayList(10)
-
-for(let i=0;i<30;i++){
-    arrayList.push(i)
-}
-arrayList.clear()
-console.log(arrayList);
