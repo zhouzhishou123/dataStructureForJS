@@ -1,7 +1,7 @@
 /*
  * @Author: zhouzhishou
  * @Date: 2021-05-10 10:48:02
- * @LastEditTime: 2021-05-11 16:51:38
+ * @LastEditTime: 2021-05-11 18:40:28
  * @Description: 二叉搜索树
  */
 
@@ -65,9 +65,40 @@ class BinarySearchTree<T> {
     return this.length;
   }
   /**
+   * 二叉树的高度
+   */
+  _height(node: INode<T>): number {
+    if (node === null) return 0;
+    return 1 + Math.max(this._height(node.left), this._height(node.right));
+  }
+  /**
+   * 二叉树的高度
+   */
+  height(node: INode<T>): number {
+    if (node === null) return 0;
+    let height = 0; // 节点的高度
+    const queue = [node];
+    let levelNodeSize = queue.length //每层节点的数量
+    while (queue.length) {
+      let _node = queue.shift();
+      levelNodeSize--
+      if (_node.left) {
+        queue.push(_node.left);
+      }
+      if (_node.right) {
+        queue.push(_node.right);
+      }
+      if(levelNodeSize === 0){
+        levelNodeSize = queue.length
+        height++
+      }
+    }
+    return height
+  }
+  /**
    * 添加元素
    */
-  insert(key: T) {
+  insert(key: T): void {
     if (this.root === null) {
       this.root = new Node(key, null);
     } else {
@@ -98,7 +129,7 @@ class BinarySearchTree<T> {
   /**
    * 前序遍历
    */
-  preOrderTraverse(node: INode<T>) {
+  preOrderTraverse(node: INode<T>): T[] {
     const res: T[] = [];
     function traverse(node: INode<T>) {
       if (node === null) return;
@@ -112,7 +143,7 @@ class BinarySearchTree<T> {
   /**
    * 中序遍历
    */
-  inOrderTraverse(node: INode<T>) {
+  inOrderTraverse(node: INode<T>): T[] {
     const res: T[] = [];
     function traverse(node: INode<T>) {
       if (node === null) return;
@@ -126,7 +157,7 @@ class BinarySearchTree<T> {
   /**
    * 后序遍历
    */
-  postOrderTraverse(node: INode<T>) {
+  postOrderTraverse(node: INode<T>): T[] {
     const res: T[] = [];
     function traverse(node: INode<T>) {
       if (node === null) return;
@@ -140,7 +171,7 @@ class BinarySearchTree<T> {
   /**
    * 层序遍历
    */
-  levelOrderTraverse(node: INode<T>) {
+  levelOrderTraverse(node: INode<T>): T[] {
     if (node === null) return [];
     const res: T[] = [];
     const queue: INode<T>[] = [node]; //队列

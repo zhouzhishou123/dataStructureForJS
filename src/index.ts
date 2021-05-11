@@ -16,4 +16,5 @@ console.log(binarySearchTree, '====binarySearchTree=====');
 
 let res =  binarySearchTree.levelOrderTraverse(binarySearchTree.root)
 
-console.log(res);
+console.log(binarySearchTree.height(binarySearchTree.root));
+console.log(binarySearchTree._height(binarySearchTree.root));
