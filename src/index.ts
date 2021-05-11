@@ -7,11 +7,13 @@
 import BinarySearchTree from "./package/Tree/BinarySearchTree";
 
 const binarySearchTree = new BinarySearchTree()
-
-binarySearchTree.insert(8)
-binarySearchTree.insert(6)
-binarySearchTree.insert(9)
-binarySearchTree.insert(5)
-binarySearchTree.insert(7)
+let arr = [7, 4, 9, 2, 1, 3, 5, 8, 11, 10, 12]
+for(let i=0;i<arr.length;i++){
+    binarySearchTree.insert(arr[i])
+}
 console.log(binarySearchTree.size(), '====binarySearchTree=====');
 console.log(binarySearchTree, '====binarySearchTree=====');
+
+let res =  binarySearchTree.levelOrderTraverse(binarySearchTree.root)
+
+console.log(res);

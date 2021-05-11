@@ -1,7 +1,7 @@
 /*
  * @Author: zhouzhishou
  * @Date: 2021-05-10 10:48:02
- * @LastEditTime: 2021-05-10 14:31:58
+ * @LastEditTime: 2021-05-11 16:51:38
  * @Description: 二叉搜索树
  */
 
@@ -24,6 +24,15 @@ interface INode<T> {
   left: INode<T> | null;
   right: INode<T> | null;
   parent: INode<T> | null;
+}
+
+interface IBinarySearchTree<T> {
+  root: INode<T>;
+  length: number;
+  compareFn: ICompareFn<T>;
+  size: () => number;
+  insert: () => void;
+  preOrderTraverse: () => void;
 }
 
 /**
@@ -55,10 +64,10 @@ class BinarySearchTree<T> {
   size(): number {
     return this.length;
   }
+  /**
+   * 添加元素
+   */
   insert(key: T) {
-    /**
-     * 根节点为空时
-     */
     if (this.root === null) {
       this.root = new Node(key, null);
     } else {
@@ -73,17 +82,79 @@ class BinarySearchTree<T> {
         } else if (cmp < 0) {
           node = node.left;
         } else {
+          node.key = key; // 相等的就覆盖
           return;
         }
       }
       const newNode = new Node(key, parent);
       if (cmp > 0) {
         parent.right = newNode;
-      }  else {
+      } else {
         parent.left = newNode;
       }
     }
-    this.length++
+    this.length++;
+  }
+  /**
+   * 前序遍历
+   */
+  preOrderTraverse(node: INode<T>) {
+    const res: T[] = [];
+    function traverse(node: INode<T>) {
+      if (node === null) return;
+      res.push(node.key);
+      traverse(node.left);
+      traverse(node.right);
+    }
+    traverse(node);
+    return res;
+  }
+  /**
+   * 中序遍历
+   */
+  inOrderTraverse(node: INode<T>) {
+    const res: T[] = [];
+    function traverse(node: INode<T>) {
+      if (node === null) return;
+      traverse(node.left);
+      res.push(node.key);
+      traverse(node.right);
+    }
+    traverse(node);
+    return res;
+  }
+  /**
+   * 后序遍历
+   */
+  postOrderTraverse(node: INode<T>) {
+    const res: T[] = [];
+    function traverse(node: INode<T>) {
+      if (node === null) return;
+      traverse(node.left);
+      traverse(node.right);
+      res.push(node.key);
+    }
+    traverse(node);
+    return res;
+  }
+  /**
+   * 层序遍历
+   */
+  levelOrderTraverse(node: INode<T>) {
+    if (node === null) return [];
+    const res: T[] = [];
+    const queue: INode<T>[] = [node]; //队列
+    while (queue.length) {
+      let node = queue.pop();
+      res.push(node.key);
+      if (node.left) {
+        queue.unshift(node.left);
+      }
+      if (node.right) {
+        queue.unshift(node.right);
+      }
+    }
+    return res;
   }
 }
 
