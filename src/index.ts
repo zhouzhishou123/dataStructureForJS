@@ -14,7 +14,4 @@ for(let i=0;i<arr.length;i++){
 console.log(binarySearchTree.size(), '====binarySearchTree=====');
 console.log(binarySearchTree, '====binarySearchTree=====');
 
-let res =  binarySearchTree.levelOrderTraverse(binarySearchTree.root)
-
-console.log(binarySearchTree.height(binarySearchTree.root));
-console.log(binarySearchTree._height(binarySearchTree.root));
+console.log(binarySearchTree.search(11));

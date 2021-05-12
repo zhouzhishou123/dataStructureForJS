@@ -1,7 +1,7 @@
 /*
  * @Author: zhouzhishou
  * @Date: 2021-05-10 10:48:02
- * @LastEditTime: 2021-05-11 18:40:28
+ * @LastEditTime: 2021-05-12 16:48:05
  * @Description: 二叉搜索树
  */
 
@@ -24,6 +24,7 @@ interface INode<T> {
   left: INode<T> | null;
   right: INode<T> | null;
   parent: INode<T> | null;
+  isLeaf: () => boolean;
 }
 
 interface IBinarySearchTree<T> {
@@ -47,6 +48,9 @@ class Node<T> {
     this.key = key;
     this.parent = parent;
   }
+  isLeaf(): boolean {
+    return this.right === null && this.left === null;
+  }
 }
 
 class BinarySearchTree<T> {
@@ -67,33 +71,101 @@ class BinarySearchTree<T> {
   /**
    * 二叉树的高度
    */
-  _height(node: INode<T>): number {
+  _height(node: INode<T> = this.root): number {
     if (node === null) return 0;
     return 1 + Math.max(this._height(node.left), this._height(node.right));
   }
   /**
    * 二叉树的高度
    */
-  height(node: INode<T>): number {
+  height(node: INode<T> = this.root): number {
     if (node === null) return 0;
     let height = 0; // 节点的高度
     const queue = [node];
-    let levelNodeSize = queue.length //每层节点的数量
+    let levelNodeSize = queue.length; //每层节点的数量
     while (queue.length) {
       let _node = queue.shift();
-      levelNodeSize--
+      levelNodeSize--;
       if (_node.left) {
         queue.push(_node.left);
       }
       if (_node.right) {
         queue.push(_node.right);
       }
-      if(levelNodeSize === 0){
-        levelNodeSize = queue.length
-        height++
+      if (levelNodeSize === 0) {
+        levelNodeSize = queue.length;
+        height++;
       }
     }
-    return height
+    return height;
+  }
+  /**
+   * 是否为完全二叉树
+   */
+  isComplete(): boolean {
+    const node = this.root;
+    if (node === null) return false;
+    const queue = [node];
+    let leaf = false; // 是否为叶子节点
+    while (queue.length) {
+      let _node = queue.shift();
+      if (leaf && !_node.isLeaf()) return false;
+      if (_node.left) {
+        queue.push(_node.left);
+      } else {
+        // 左节点为空 右节点存在
+        if (_node.right) return false;
+      }
+      if (_node.right) {
+        queue.push(_node.right);
+      } else {
+        // 右节点为空左节点存在 || 左右节点都为空 后面所有的节点一定叶子节点
+        leaf = true;
+      }
+    }
+    return true;
+  }
+  /**
+   * 求二叉树中最小节点
+   */
+  minNode():INode<T>{
+    let node = this.root
+    if(node === null) return node
+    while(node && node.left){
+      node = node.left
+    }
+    return node
+  }
+  /**
+   * 求二叉树中最大节点
+   */
+  maxNode():INode<T>{
+    let node = this.root
+    if(node === null) return node
+    while(node && node.right){
+      node = node.right
+    }
+    return node
+  }
+  /**
+   * 查找key的节点
+   */
+  search(key:T):INode<T> {
+     let cmp = 0
+     let node = this.root
+     let queue = [node]
+     while(queue.length){
+       let _node = queue.shift()
+       cmp = this.compareFn(key, _node.key)
+       if(cmp === CompareResult.EQUAL) return _node
+       if(_node.left){
+         queue.push(_node.left)
+       }
+       if(_node.right){
+         queue.push(_node.right)
+       }
+     }
+     return null
   }
   /**
    * 添加元素
@@ -129,7 +201,7 @@ class BinarySearchTree<T> {
   /**
    * 前序遍历
    */
-  preOrderTraverse(node: INode<T>): T[] {
+  preOrderTraverse(node: INode<T> = this.root): T[] {
     const res: T[] = [];
     function traverse(node: INode<T>) {
       if (node === null) return;
@@ -143,7 +215,7 @@ class BinarySearchTree<T> {
   /**
    * 中序遍历
    */
-  inOrderTraverse(node: INode<T>): T[] {
+  inOrderTraverse(node: INode<T> = this.root): T[] {
     const res: T[] = [];
     function traverse(node: INode<T>) {
       if (node === null) return;
@@ -157,7 +229,7 @@ class BinarySearchTree<T> {
   /**
    * 后序遍历
    */
-  postOrderTraverse(node: INode<T>): T[] {
+  postOrderTraverse(node: INode<T> = this.root): T[] {
     const res: T[] = [];
     function traverse(node: INode<T>) {
       if (node === null) return;
@@ -171,7 +243,7 @@ class BinarySearchTree<T> {
   /**
    * 层序遍历
    */
-  levelOrderTraverse(node: INode<T>): T[] {
+  levelOrderTraverse(node: INode<T> = this.root): T[] {
     if (node === null) return [];
     const res: T[] = [];
     const queue: INode<T>[] = [node]; //队列
