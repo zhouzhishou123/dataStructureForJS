@@ -1,7 +1,7 @@
 /*
  * @Author: zhouzhishou
  * @Date: 2021-05-10 10:48:02
- * @LastEditTime: 2021-05-12 16:55:47
+ * @LastEditTime: 2021-05-12 17:48:42
  * @Description: 二叉搜索树
  */
 
@@ -204,55 +204,48 @@ class BinarySearchTree<T> {
   /**
    * 前序遍历
    */
-  preOrderTraverse(node: INode<T> = this.root): T[] {
-    const res: T[] = [];
+  preOrderTraverse(callback:(key:T)=> any, node: INode<T> = this.root): void {
     function traverse(node: INode<T>) {
       if (node === null) return;
-      res.push(node.key);
+      callback(node.key)
       traverse(node.left);
       traverse(node.right);
     }
     traverse(node);
-    return res;
   }
   /**
    * 中序遍历
    */
-  inOrderTraverse(node: INode<T> = this.root): T[] {
-    const res: T[] = [];
+  inOrderTraverse(callback:(key:T)=> any, node: INode<T> = this.root):void{
     function traverse(node: INode<T>) {
       if (node === null) return;
       traverse(node.left);
-      res.push(node.key);
+      callback(node.key)
       traverse(node.right);
     }
     traverse(node);
-    return res;
   }
   /**
    * 后序遍历
    */
-  postOrderTraverse(node: INode<T> = this.root): T[] {
-    const res: T[] = [];
+  postOrderTraverse(callback:(key:T)=> any, node: INode<T> = this.root): void {
     function traverse(node: INode<T>) {
       if (node === null) return;
       traverse(node.left);
       traverse(node.right);
-      res.push(node.key);
+      callback(node.key)
     }
     traverse(node);
-    return res;
   }
   /**
    * 层序遍历
    */
-  levelOrderTraverse(node: INode<T> = this.root): T[] {
-    if (node === null) return [];
-    const res: T[] = [];
+  levelOrderTraverse(callback:(key:T)=> any, node: INode<T> = this.root): void {
+    if (node === null) return;
     const queue: INode<T>[] = [node]; //队列
     while (queue.length) {
       let node = queue.pop();
-      res.push(node.key);
+      callback(node.key)
       if (node.left) {
         queue.unshift(node.left);
       }
@@ -260,7 +253,6 @@ class BinarySearchTree<T> {
         queue.unshift(node.right);
       }
     }
-    return res;
   }
 }
 
