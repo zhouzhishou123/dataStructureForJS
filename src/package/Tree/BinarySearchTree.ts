@@ -1,7 +1,7 @@
 /*
  * @Author: zhouzhishou
  * @Date: 2021-05-10 10:48:02
- * @LastEditTime: 2021-05-12 16:48:05
+ * @LastEditTime: 2021-05-12 16:55:47
  * @Description: 二叉搜索树
  */
 
@@ -147,9 +147,12 @@ class BinarySearchTree<T> {
     }
     return node
   }
+
   /**
-   * 查找key的节点
-   */
+   * @description: 查找key的节点
+   * @param {T} key
+   * @return {*}
+   */  
   search(key:T):INode<T> {
      let cmp = 0
      let node = this.root
