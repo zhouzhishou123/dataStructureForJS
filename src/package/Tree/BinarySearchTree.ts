@@ -1,7 +1,7 @@
 /*
  * @Author: zhouzhishou
  * @Date: 2021-05-10 10:48:02
- * @LastEditTime: 2021-05-12 17:48:42
+ * @LastEditTime: 2021-05-13 16:06:06
  * @Description: 二叉搜索树
  */
 
@@ -128,47 +128,48 @@ class BinarySearchTree<T> {
   /**
    * 求二叉树中最小节点
    */
-  minNode():INode<T>{
-    let node = this.root
-    if(node === null) return node
-    while(node && node.left){
-      node = node.left
+  minNode(): INode<T> {
+    let node = this.root;
+    if (node === null) return node;
+    while (node && node.left) {
+      node = node.left;
     }
-    return node
+    return node;
   }
   /**
    * 求二叉树中最大节点
    */
-  maxNode():INode<T>{
-    let node = this.root
-    if(node === null) return node
-    while(node && node.right){
-      node = node.right
+  maxNode(): INode<T> {
+    let node = this.root;
+    if (node === null) return node;
+    while (node && node.right) {
+      node = node.right;
     }
-    return node
+    return node;
   }
 
   /**
    * @description: 查找key的节点
    * @param {T} key
    * @return {*}
-   */  
-  search(key:T):INode<T> {
-     let cmp = 0
-     let node = this.root
-     let queue = [node]
-     while(queue.length){
-       let _node = queue.shift()
-       cmp = this.compareFn(key, _node.key)
-       if(cmp === CompareResult.EQUAL) return _node
-       if(_node.left){
-         queue.push(_node.left)
-       }
-       if(_node.right){
-         queue.push(_node.right)
-       }
-     }
-     return null
+   */
+
+  search(key: T): INode<T> {
+    let cmp = 0;
+    let node = this.root;
+    let queue = [node];
+    while (queue.length) {
+      let _node = queue.shift();
+      cmp = this.compareFn(key, _node.key);
+      if (cmp === CompareResult.EQUAL) return _node;
+      if (_node.left) {
+        queue.push(_node.left);
+      }
+      if (_node.right) {
+        queue.push(_node.right);
+      }
+    }
+    return null;
   }
   /**
    * 添加元素
@@ -204,10 +205,10 @@ class BinarySearchTree<T> {
   /**
    * 前序遍历
    */
-  preOrderTraverse(callback:(key:T)=> any, node: INode<T> = this.root): void {
+  preOrderTraverse(callback: (key: T) => any, node: INode<T> = this.root): void {
     function traverse(node: INode<T>) {
       if (node === null) return;
-      callback(node.key)
+      callback(node.key);
       traverse(node.left);
       traverse(node.right);
     }
@@ -216,11 +217,11 @@ class BinarySearchTree<T> {
   /**
    * 中序遍历
    */
-  inOrderTraverse(callback:(key:T)=> any, node: INode<T> = this.root):void{
+  inOrderTraverse(callback: (key: T) => any, node: INode<T> = this.root): void {
     function traverse(node: INode<T>) {
       if (node === null) return;
       traverse(node.left);
-      callback(node.key)
+      callback(node.key);
       traverse(node.right);
     }
     traverse(node);
@@ -228,24 +229,24 @@ class BinarySearchTree<T> {
   /**
    * 后序遍历
    */
-  postOrderTraverse(callback:(key:T)=> any, node: INode<T> = this.root): void {
+  postOrderTraverse(callback: (key: T) => any, node: INode<T> = this.root): void {
     function traverse(node: INode<T>) {
       if (node === null) return;
       traverse(node.left);
       traverse(node.right);
-      callback(node.key)
+      callback(node.key);
     }
     traverse(node);
   }
   /**
    * 层序遍历
    */
-  levelOrderTraverse(callback:(key:T)=> any, node: INode<T> = this.root): void {
+  levelOrderTraverse(callback: (key: T) => any, node: INode<T> = this.root): void {
     if (node === null) return;
     const queue: INode<T>[] = [node]; //队列
     while (queue.length) {
       let node = queue.pop();
-      callback(node.key)
+      callback(node.key);
       if (node.left) {
         queue.unshift(node.left);
       }

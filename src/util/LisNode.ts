@@ -5,7 +5,7 @@
  * @Description: 
  */
 
-interface INode {
+export interface INode {
     val: number;
     next: INode;
   }
