@@ -12,8 +12,6 @@ for (let i = 0; i < arr.length; i++) {
   binarySearchTree.insert(arr[i]);
 }
 
-function callback(key) {
-    console.log(key);
-    
-}
-binarySearchTree.postOrderTraverse(callback)
+binarySearchTree.remove(4)
+console.log(binarySearchTree);
+
