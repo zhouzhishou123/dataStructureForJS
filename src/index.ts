@@ -4,16 +4,9 @@
  * @Description:
  */
 
-import BinarySearchTree from "./package/Tree/BinarySearchTree";
-import Stack from "./package/Stack";
-const binarySearchTree = new BinarySearchTree<number>();
-let arr = [7, 4, 9, 2, 1, 3, 5, 8, 11, 10, 12];
-for (let i = 0; i < arr.length; i++) {
-  binarySearchTree.insert(arr[i]);
-}
+//5 的阶乘
 
-function callback(key) {
-    console.log(key);
-    
+function factorial(num:number){
+  if(num === 1) return num
+  return factorial(num - 1) * num
 }
-binarySearchTree.postOrderTraverse(callback)
