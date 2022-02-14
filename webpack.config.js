@@ -1,3 +1,8 @@
+/*
+ * @Author: zhouzhishou
+ * @Date: 2020-11-05 21:34:55
+ * @Description: 
+ */
 
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require( 'clean-webpack-plugin' );
@@ -9,7 +14,7 @@ module.exports = {
     },
     
     // Enable sourcemaps for debugging webpack's output.
-    devtool: "source-map",
+    // devtool: "source-map",
     
     resolve: {
         // Add '.ts' and '.tsx' as resolvable extensions.

@@ -4,9 +4,16 @@
  * @Description:
  */
 
-//5 的阶乘
+// import BinaryHeap from './package/Heap/BinaryHeap'
+// function compare<T>(a: T, b: T): number {
+//     if (a === b) return 0;
+//     if (a > b) return -1;
+//     if (a < b) return 1;
+//   }
+// let data:number[] = [88,44,53,41,16,6,70,18,85,98,81,23,36,43,37]
+// const binaryHeap = new BinaryHeap(data, compare)
+// console.log(binaryHeap.elements);
+import PriorityQueue from './package/PriorityQueue'
 
-function factorial(num:number){
-  if(num === 1) return num
-  return factorial(num - 1) * num
-}
+
+
