@@ -13,7 +13,7 @@ class ArrayList<T> {
     /**
      * @Description: 存储所有的元素
      */    
-    private elements: T[] = []
+    private elements: any[] = []
     /**
      * @Description: 元素的数量
      */  
