@@ -1,8 +1,7 @@
-import { reverseList } from './reverse-linked-list';
 /*
  * @Author: zhouzhishou
  * @Date: 2022-02-16 12:33:48
- * @LastEditTime: 2022-02-17 17:30:28
+ * @LastEditTime: 2022-02-17 22:49:05
  * @Description:  剑指 Offer II 024. 反转链表 https://leetcode-cn.com/problems/UHnkqh/
  */
 import { ListNode, IListNode} from './ListNode'
@@ -38,5 +37,4 @@ function reverseList2<T>(head:IListNode<T>) :IListNode<T>{
     }
     return newHead
 }
-console.log(reverseList1(node1));
 

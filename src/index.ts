@@ -13,7 +13,7 @@
 // let data:number[] = [88,44,53,41,16,6,70,18,85,98,81,23,36,43,37]
 // const binaryHeap = new BinaryHeap(data, compare)
 // console.log(binaryHeap.elements);
-import './leetcode/LinkedList/shan-chu-lian-biao-de-jie-dian-lcof'
+import './leetcode/LinkedList/middle-of-the-linked-list'
 
 
 
