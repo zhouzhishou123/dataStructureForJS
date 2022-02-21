@@ -1,14 +1,16 @@
 /*
  * @Author: zhouzhishou
  * @Date: 2021-05-13 14:53:10
- * @LastEditTime: 2021-05-13 14:55:20
+ * @LastEditTime: 2022-02-21 19:13:08
  * @Description:
  */
 
 export interface INode<T> {
-    val:T
+    val?:T
+    key?:T
     left: INode<T>
     right: INode<T>
+    parent?:INode<T>
 }
 
 
