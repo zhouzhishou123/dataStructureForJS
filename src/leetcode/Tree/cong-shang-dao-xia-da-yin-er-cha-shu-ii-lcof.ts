@@ -1,7 +1,7 @@
 /*
  * @Author: zhouzhishou
  * @Date: 2022-02-23 12:48:02
- * @LastEditTime: 2022-02-23 14:00:11
+ * @LastEditTime: 2022-02-24 16:38:34
  * @Description: 剑指 Offer 32 - II. 从上到下打印二叉树 II https://leetcode-cn.com/problems/cong-shang-dao-xia-da-yin-er-cha-shu-ii-lcof/
  */
 
@@ -33,7 +33,7 @@ const levelOrder = function<T>(root:INode<T>): T[][] {
     while(queue.length !== 0){
         let _node: INode<T>  = queue.shift()
         levelNodeSize--
-        levelNode.push(_node.val)
+        levelNode.push(_node.key)
         if(node.left) {
             queue.push(node.left)
         }
