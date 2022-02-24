@@ -1,7 +1,7 @@
 /*
  * @Author: zhouzhishou
  * @Date: 2021-05-13 14:53:10
- * @LastEditTime: 2022-02-25 01:34:30
+ * @LastEditTime: 2022-02-25 01:41:24
  * @Description:
  */
 import { ICompareFn } from './comparator'
@@ -21,6 +21,7 @@ export interface ITree<T> {
 
 export interface INode<T> {
   key: T;
+  height?: number
   left: INode<T> | null;
   right: INode<T> | null;
   parent: INode<T> | null;
@@ -50,11 +51,13 @@ export interface IAVLNode<T> extends INode<T>{
 }
 
 /**
- * 每个树的子节点
+ * @param {*}
+ * @return {*}
+ * @Description: 二叉搜索树的节点
  */
 export class Node<T> implements INode<T> {
   key: T; // 节点值
-  left: INode<T> | null = null; // 左子节点
+  left: INode<T> | null  = null; // 左子节点
   right: INode<T> | null = null; // 右子节点
   parent: INode<T> | null = null; // 父节点
   constructor(key: T, parent: INode<T> | null) {
@@ -75,6 +78,11 @@ export class Node<T> implements INode<T> {
   }
 }
 
+/**
+ * @param {*}
+ * @return {*}
+ * @Description: AVL树的节点
+ */
 export class AVLNode<T> extends Node<T> implements IAVLNode<T> {
     height: number = 1
     constructor(key: T, parent: INode<T> | null){
@@ -95,7 +103,7 @@ export class AVLNode<T> extends Node<T> implements IAVLNode<T> {
    * @return {*}
    * @Description: 
    */  
-  updateHeight(): void{
+  updateHeight(): void {
     let leftHeight = this.left === null ? 0 : this.left.height
     let rightHeight = this.right === null ? 0 : this.right.height
     this.height = Math.max(leftHeight, rightHeight)
@@ -113,7 +121,6 @@ export class AVLNode<T> extends Node<T> implements IAVLNode<T> {
     return this.isLeftChild() ? this.left : this.right
   }
 }
-
 
 export function TreeNode<T>(val:T, left: INode<T>, right: INode<T>) {
   this.val = val === undefined ? 0 : val;
