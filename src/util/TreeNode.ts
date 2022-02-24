@@ -1,7 +1,7 @@
 /*
  * @Author: zhouzhishou
  * @Date: 2021-05-13 14:53:10
- * @LastEditTime: 2022-02-24 15:26:05
+ * @LastEditTime: 2022-02-25 01:34:30
  * @Description:
  */
 import { ICompareFn } from './comparator'
@@ -28,6 +28,7 @@ export interface INode<T> {
   hasTwoNode: () => boolean;
 }
 
+// 二叉树树的接口
 export interface IBinarySearchTree<T> {
   compareFn: ICompareFn<T>;
   insert: (key: T) => void;
@@ -37,9 +38,15 @@ export interface IBinarySearchTree<T> {
   search: (key: T) => INode<T>
 }
 
+// AVL树的接口
 export interface IAVLTree<T> {
+  createNode: (key: T, parent: AVLNode<T> | null)=> IAVLNode<T>
+  afterAdd: (node: INode<T>)=> void
+}
+
+export interface IAVLNode<T> extends INode<T>{
   height: number // AVL树的高度
-  balanceFactor?: number // 平衡因子
+  balanceFactor: ()=> number
 }
 
 /**
@@ -59,6 +66,51 @@ export class Node<T> implements INode<T> {
   }
   hasTwoNode() {
     return this.right !== null && this.left !== null;
+  }
+  isLeftChild(){
+    return this.parent!==null && this === this.parent.left
+  }
+  isRightChild(){
+    return this.parent!==null && this === this.parent.right
+  }
+}
+
+export class AVLNode<T> extends Node<T> implements IAVLNode<T> {
+    height: number = 1
+    constructor(key: T, parent: INode<T> | null){
+      super(key, parent)
+    }
+    /**
+     * @param {*}
+     * @return {*}
+     * @Description: 
+     */    
+    balanceFactor(): number{
+      let leftHeight = this.left === null ? 0 : this.left.height
+      let rightHeight = this.right === null ? 0 : this.right.height
+      return leftHeight - rightHeight
+  }
+  /**
+   * @param {*}
+   * @return {*}
+   * @Description: 
+   */  
+  updateHeight(): void{
+    let leftHeight = this.left === null ? 0 : this.left.height
+    let rightHeight = this.right === null ? 0 : this.right.height
+    this.height = Math.max(leftHeight, rightHeight)
+  }
+  /**
+   * @param {*}
+   * @return {*}
+   * @Description: 
+   */  
+  tallerChild(){
+    let leftHeight = this.left === null ? 0 : this.left.height
+    let rightHeight = this.right === null ? 0 : this.right.height
+    if(leftHeight > rightHeight) return this.left
+    if(leftHeight < rightHeight) return this.right
+    return this.isLeftChild() ? this.left : this.right
   }
 }
 

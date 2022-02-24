@@ -1,7 +1,7 @@
 /*
  * @Author: zhouzhishou
  * @Date: 2021-05-10 10:48:02
- * @LastEditTime: 2022-02-24 15:22:25
+ * @LastEditTime: 2022-02-25 00:28:14
  * @Description: 二叉搜索树
  */
 import BinaryTree from '../Tree/BinaryTree'
@@ -55,13 +55,21 @@ class BinarySearchTree<T> extends BinaryTree<T> implements IBinarySearchTree<T> 
     }
     return null;
   }
-  reBalance(){}
+  protected afterAdd(node: INode<T>): void{}
+
+  protected createNode(key: T, parent: INode<T> | null): INode<T>{
+    return new Node(key, parent)
+  }
+  
   /**
    * 添加元素
    */
   insert(key: T): void {
     if (this.root === null) {
-      this.root = new Node(key, null);
+      // new Node(key, null);
+      this.root = this.createNode(key, null)
+      this.length++;
+      this.afterAdd(this.root)
     } else {
       let node = this.root;
       let cmp = 0;
@@ -78,15 +86,16 @@ class BinarySearchTree<T> extends BinaryTree<T> implements IBinarySearchTree<T> 
           return;
         }
       }
-      const newNode = new Node(key, parent);
+      // new Node(key, parent);
+      const newNode = this.createNode(key, parent)
       if (cmp > 0) {
         parent.right = newNode;
       } else {
         parent.left = newNode;
       }
-      this.reBalance()
+      this.length++;
+      this.afterAdd(node)
     }
-    this.length++;
   }
 
   /**
