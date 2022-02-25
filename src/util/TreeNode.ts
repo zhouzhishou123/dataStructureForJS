@@ -1,7 +1,7 @@
 /*
  * @Author: zhouzhishou
  * @Date: 2021-05-13 14:53:10
- * @LastEditTime: 2022-02-25 01:41:24
+ * @LastEditTime: 2022-02-25 17:16:42
  * @Description:
  */
 import { ICompareFn } from './comparator'
@@ -21,7 +21,6 @@ export interface ITree<T> {
 
 export interface INode<T> {
   key: T;
-  height?: number
   left: INode<T> | null;
   right: INode<T> | null;
   parent: INode<T> | null;
@@ -41,13 +40,18 @@ export interface IBinarySearchTree<T> {
 
 // AVL树的接口
 export interface IAVLTree<T> {
-  createNode: (key: T, parent: AVLNode<T> | null)=> IAVLNode<T>
-  afterAdd: (node: INode<T>)=> void
+  createNode: (key: T, parent: AVLNode<T> | null) => AVLNode<T>
+  afterAdd: (node: AVLNode<T>) => void
+  reBalance: (node: AVLNode<T>) => void
+  rotateLeft: (node: AVLNode<T>) => void
+  rotateRight: (node: AVLNode<T>) => void
 }
 
-export interface IAVLNode<T> extends INode<T>{
+export interface IAVLNode<T> extends INode<T> {
   height: number // AVL树的高度
-  balanceFactor: ()=> number
+  balanceFactor: () => number
+  updateHeight: () => void
+  tallerChild: () => AVLNode<T>
 }
 
 /**
@@ -57,7 +61,7 @@ export interface IAVLNode<T> extends INode<T>{
  */
 export class Node<T> implements INode<T> {
   key: T; // 节点值
-  left: INode<T> | null  = null; // 左子节点
+  left: INode<T> | null = null; // 左子节点
   right: INode<T> | null = null; // 右子节点
   parent: INode<T> | null = null; // 父节点
   constructor(key: T, parent: INode<T> | null) {
@@ -70,11 +74,11 @@ export class Node<T> implements INode<T> {
   hasTwoNode() {
     return this.right !== null && this.left !== null;
   }
-  isLeftChild(){
-    return this.parent!==null && this === this.parent.left
+  isLeftChild() {
+    return this.parent !== null && this === this.parent.left
   }
-  isRightChild(){
-    return this.parent!==null && this === this.parent.right
+  isRightChild() {
+    return this.parent !== null && this === this.parent.right
   }
 }
 
@@ -84,45 +88,45 @@ export class Node<T> implements INode<T> {
  * @Description: AVL树的节点
  */
 export class AVLNode<T> extends Node<T> implements IAVLNode<T> {
-    height: number = 1
-    constructor(key: T, parent: INode<T> | null){
-      super(key, parent)
-    }
-    /**
-     * @param {*}
-     * @return {*}
-     * @Description: 
-     */    
-    balanceFactor(): number{
-      let leftHeight = this.left === null ? 0 : this.left.height
-      let rightHeight = this.right === null ? 0 : this.right.height
-      return leftHeight - rightHeight
+  height: number = 1
+  constructor(key: T, parent: INode<T> | null) {
+    super(key, parent)
   }
   /**
    * @param {*}
    * @return {*}
    * @Description: 
-   */  
+   */
+  balanceFactor(): number {
+    let leftHeight = this.left === null ? 0 : (this.left as AVLNode<T>).height
+    let rightHeight = this.right === null ? 0 : (this.right as AVLNode<T>).height
+    return leftHeight - rightHeight
+  }
+  /**
+   * @param {*}
+   * @return {*}
+   * @Description: 
+   */
   updateHeight(): void {
-    let leftHeight = this.left === null ? 0 : this.left.height
-    let rightHeight = this.right === null ? 0 : this.right.height
-    this.height = Math.max(leftHeight, rightHeight)
+    let leftHeight = this.left === null ? 0 : (this.left as AVLNode<T>).height
+    let rightHeight = this.right === null ? 0 : (this.right as AVLNode<T>).height
+    this.height = Math.max(leftHeight, rightHeight) + 1
   }
   /**
    * @param {*}
    * @return {*}
    * @Description: 
-   */  
-  tallerChild(){
-    let leftHeight = this.left === null ? 0 : this.left.height
-    let rightHeight = this.right === null ? 0 : this.right.height
-    if(leftHeight > rightHeight) return this.left
-    if(leftHeight < rightHeight) return this.right
-    return this.isLeftChild() ? this.left : this.right
+   */
+  tallerChild(): AVLNode<T> {
+    let leftHeight = this.left === null ? 0 : (this.left as AVLNode<T>).height
+    let rightHeight = this.right === null ? 0 : (this.right as AVLNode<T>).height
+    if (leftHeight > rightHeight) return (this.left as AVLNode<T>)
+    if (leftHeight < rightHeight) return (this.right as AVLNode<T>)
+    return this.isLeftChild() ? (this.left as AVLNode<T>) : (this.right as AVLNode<T>)
   }
 }
 
-export function TreeNode<T>(val:T, left: INode<T>, right: INode<T>) {
+export function TreeNode<T>(val: T, left: INode<T>, right: INode<T>) {
   this.val = val === undefined ? 0 : val;
   this.left = left === undefined ? null : left;
   this.right = right === undefined ? null : right;

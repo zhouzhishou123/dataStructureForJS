@@ -1,32 +1,33 @@
 /*
  * @Author: zhouzhishou
  * @Date: 2022-02-24 14:35:39
- * @LastEditTime: 2022-02-25 01:31:58
+ * @LastEditTime: 2022-02-25 17:14:16
  * @Description: AVL树
  */
 
-import {INode,AVLNode ,IAVLTree} from '../../util/TreeNode'
+import { AVLNode, IAVLTree } from '../../util/TreeNode'
 import BinarySearchTree from './BinarySearchTree'
+
 class AVLTree<T> extends BinarySearchTree<T> implements IAVLTree<T> {
-    constructor(compareFn){
+    constructor(compareFn: any) {
         super(compareFn)
     }
-    createNode(key: T, parent: AVLNode<T> | null){
+    createNode(key: T, parent: AVLNode<T> | null) {
         return new AVLNode(key, parent)
     }
-    private isBalanced<T>(node): boolean{
-        return Math.abs(node.balanceFactor()) <=1
+    private isBalanced<T>(node: AVLNode<T>): boolean {
+        return Math.abs(node.balanceFactor()) <= 1
     }
-    updateHeight(node){
+    updateHeight(node: AVLNode<T>) {
         let avlNode = node
         avlNode.updateHeight()
     }
-    afterAdd(node: INode<T>): void{
-        while((node=node.parent) !== null){
-            if(this.isBalanced(node)){
+    afterAdd(node: any): void {
+        while ((node = node.parent) !== null) {
+            if (this.isBalanced(node)) {
                 // 更新高度
                 this.updateHeight(node)
-            }else {
+            } else {
                 //恢复平衡
                 this.reBalance(node)
                 break;
@@ -37,22 +38,22 @@ class AVLTree<T> extends BinarySearchTree<T> implements IAVLTree<T> {
      * @param {*} node
      * @return {*}
      * @Description: 
-     */    
-    reBalance(grand): void{
+     */
+    reBalance(grand: AVLNode<T>): void {
         let parent = grand.tallerChild()
         let node = parent.tallerChild()
-        if(parent.isLeftChild()){ // L
-            if(node.isLeftChild()){  // LL
-                this.rotateRight(grand) 
-            }else { //LR
+        if (parent.isLeftChild()) { // L
+            if (node.isLeftChild()) {  // LL
+                this.rotateRight(grand)
+            } else { //LR
                 this.rotateLeft(parent)
                 this.rotateRight(grand)
             }
-        }else { // R
-            if(node.isLeftChild()){ // RL
+        } else { // R
+            if (node.isLeftChild()) { // RL
                 this.rotateRight(parent)
                 this.rotateLeft(grand)
-            }else { //RR
+            } else { //RR
                 this.rotateLeft(grand)
             }
         }
@@ -61,16 +62,16 @@ class AVLTree<T> extends BinarySearchTree<T> implements IAVLTree<T> {
      * @param {*} node
      * @return {*}
      * @Description: 左旋转
-     */    
-    private rotateLeft(node): void{
+     */
+    rotateLeft(grand: AVLNode<T>): void {
 
     }
     /**
      * @param {*} node
      * @return {*}
      * @Description: 右旋转
-     */    
-    private rotateRight(node): void{
+     */
+    rotateRight(node: AVLNode<T>): void {
 
     }
 }

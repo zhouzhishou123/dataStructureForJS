@@ -1,12 +1,12 @@
 /*
  * @Author: zhouzhishou
  * @Date: 2021-05-10 10:48:02
- * @LastEditTime: 2022-02-25 00:28:14
+ * @LastEditTime: 2022-02-25 17:14:53
  * @Description: 二叉搜索树
  */
 import BinaryTree from '../Tree/BinaryTree'
-import {ICompareFn,defaultCompare} from '../../util/comparator'
-import {INode,IBinarySearchTree,Node} from '../../util/TreeNode'
+import { ICompareFn, defaultCompare } from '../../util/comparator'
+import { INode, IBinarySearchTree, Node, AVLNode } from '../../util/TreeNode'
 
 class BinarySearchTree<T> extends BinaryTree<T> implements IBinarySearchTree<T>  {
   compareFn: ICompareFn<T>; // 节点值的比较函数
@@ -55,12 +55,12 @@ class BinarySearchTree<T> extends BinaryTree<T> implements IBinarySearchTree<T> 
     }
     return null;
   }
-  protected afterAdd(node: INode<T>): void{}
+  protected afterAdd<T>(node: AVLNode<T>): void { }
 
-  protected createNode(key: T, parent: INode<T> | null): INode<T>{
+  protected createNode(key: T, parent: INode<T> | null): INode<T> {
     return new Node(key, parent)
   }
-  
+
   /**
    * 添加元素
    */
@@ -69,7 +69,7 @@ class BinarySearchTree<T> extends BinaryTree<T> implements IBinarySearchTree<T> 
       // new Node(key, null);
       this.root = this.createNode(key, null)
       this.length++;
-      this.afterAdd(this.root)
+      this.afterAdd(this.root as AVLNode<T>)
     } else {
       let node = this.root;
       let cmp = 0;
@@ -94,7 +94,7 @@ class BinarySearchTree<T> extends BinaryTree<T> implements IBinarySearchTree<T> 
         parent.left = newNode;
       }
       this.length++;
-      this.afterAdd(node)
+      this.afterAdd(newNode as AVLNode<T>)
     }
   }
 

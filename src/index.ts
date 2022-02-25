@@ -19,7 +19,8 @@ import {defaultCompare} from './util/comparator'
 let avlTree = new AVLTree(defaultCompare)
 
 avlTree.insert(13)
-avlTree.insert(8)
+avlTree.insert(15)
+avlTree.insert(16)
 avlTree.insert(17)
-
+avlTree.insert(18)
 console.log(avlTree, '===aaa===');
