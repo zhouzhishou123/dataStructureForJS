@@ -3,11 +3,11 @@
  * @Date: 2022-02-12 22:53:04
  * @Description: 优先级队列 底层实现堆
  */
-import Heap from "../Heap";
+import {IHeap} from "../../util/TreeNode";
 import BinaryHeap from "../Heap/BinaryHeap";
 
 class PriorityQueue<T> {
-   private heap: Heap<T>;
+   private heap: IHeap<T>;
    constructor(comparator = null){
     this.heap =  new BinaryHeap([], comparator)
    }

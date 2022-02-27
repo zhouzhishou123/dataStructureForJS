@@ -1,7 +1,7 @@
 /*
  * @Author: zhouzhishou
  * @Date: 2021-05-13 14:53:10
- * @LastEditTime: 2022-02-25 17:16:42
+ * @LastEditTime: 2022-02-26 12:33:22
  * @Description:
  */
 import { ICompareFn } from './comparator'
@@ -124,6 +124,16 @@ export class AVLNode<T> extends Node<T> implements IAVLNode<T> {
     if (leftHeight < rightHeight) return (this.right as AVLNode<T>)
     return this.isLeftChild() ? (this.left as AVLNode<T>) : (this.right as AVLNode<T>)
   }
+}
+
+export interface IHeap<T> {
+  clear: ()=> void
+  add:(e:T)=> void
+  get:()=> T
+  remove:()=> void
+  replace:(e:T)=> void
+  size: ()=> number
+  isEmpty:()=> boolean
 }
 
 export function TreeNode<T>(val: T, left: INode<T>, right: INode<T>) {

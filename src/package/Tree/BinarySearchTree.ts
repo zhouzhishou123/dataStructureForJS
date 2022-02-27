@@ -1,7 +1,7 @@
 /*
  * @Author: zhouzhishou
  * @Date: 2021-05-10 10:48:02
- * @LastEditTime: 2022-02-25 17:14:53
+ * @LastEditTime: 2022-02-25 22:36:21
  * @Description: 二叉搜索树
  */
 import BinaryTree from '../Tree/BinaryTree'
@@ -130,11 +130,16 @@ class BinarySearchTree<T> extends BinaryTree<T> implements IBinarySearchTree<T> 
         } else {
           node.parent.right = replaceNode;
         }
+        this.afterRemove(node)
       } else {
         // 度为 0
-        if (node.parent === null) this.root = null; //叶子节点根节点
+        if (node.parent === null) { //叶子节点根节点
+          this.root = null
+          return this.afterRemove(node)
+        };
         if (node === node.parent.right) node.parent.right = null; // 叶子节点
         if (node === node.parent.left) node.parent.left = null;
+        this.afterRemove(node)
       }
     }
 
@@ -149,6 +154,7 @@ class BinarySearchTree<T> extends BinaryTree<T> implements IBinarySearchTree<T> 
     }
     deleteNode(node);
   }
+  afterRemove(node: AVLNode<T>){}
 }
 
 export default BinarySearchTree;

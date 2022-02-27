@@ -10,7 +10,7 @@
 // 如果i>0 他的父节点索引为floor((i-1)/2)
 // 如果2i+1<=n-1 他的左子节点索引为2i+1 (n为元素数量 i为节点索引）
 // 如果2i+1>n-1 他没有左子节点 (n为元素数量 i为节点索引）
-import Heap from "./index";
+import {IHeap} from "../../util/TreeNode";
 
 type ICompareFn<T> = (a: T, b: T) => number;
 
@@ -26,8 +26,8 @@ function defaultCompare<T>(a: T, b: T): number {
     if (a < b) return CompareResult.LESS_THAN;
   }
 
-class BinaryHeap<T> implements Heap<T> {
-    elements: T[] = []
+class BinaryHeap<T> implements IHeap<T> {
+    private elements: T[] = []
     length: number = 0
     compareFn: ICompareFn<T>; // 节点值的比较函数
     constructor(elements:T[] = [],compareFn = defaultCompare) {
