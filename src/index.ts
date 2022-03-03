@@ -13,4 +13,4 @@
 // let data:number[] = [88,44,53,41,16,6,70,18,85,98,81,23,36,43,37]
 // const binaryHeap = new BinaryHeap(data, compare)
 // console.log(binaryHeap.elements);
-import './leetcode/BinaryTree/balance-a-binary-search-tree'
+import './package/Set/index'
