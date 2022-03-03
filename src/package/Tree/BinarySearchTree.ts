@@ -1,7 +1,7 @@
 /*
  * @Author: zhouzhishou
  * @Date: 2021-05-10 10:48:02
- * @LastEditTime: 2022-02-25 22:36:21
+ * @LastEditTime: 2022-03-03 18:32:09
  * @Description: 二叉搜索树
  */
 import BinaryTree from '../Tree/BinaryTree'
@@ -55,7 +55,7 @@ class BinarySearchTree<T> extends BinaryTree<T> implements IBinarySearchTree<T> 
     }
     return null;
   }
-  protected afterAdd<T>(node: AVLNode<T>): void { }
+  protected afterAdd<T>(node: Node<T> | AVLNode<T>): void { }
 
   protected createNode(key: T, parent: INode<T> | null): INode<T> {
     return new Node(key, parent)
@@ -154,7 +154,7 @@ class BinarySearchTree<T> extends BinaryTree<T> implements IBinarySearchTree<T> 
     }
     deleteNode(node);
   }
-  afterRemove(node: AVLNode<T>){}
+  afterRemove(node: Node<T> | AVLNode<T>){}
 }
 
 export default BinarySearchTree;
