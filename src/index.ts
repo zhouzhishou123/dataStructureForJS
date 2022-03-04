@@ -17,5 +17,6 @@ graph.addEdge('V3', 'V4', 1)
 graph.addEdge('V2', 'V0', 2)
 
 
-graph.removeEdge('V1', 'V2')
+// graph.removeEdge('V1', 'V2')
+graph.removeVertex('V3')
 console.log(graph);

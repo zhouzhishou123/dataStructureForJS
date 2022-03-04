@@ -137,6 +137,8 @@ class Graph<V, W> implements IGraph<V, W> {
             vertex.fromEdges.clear()
             // 删除出度的边
             vertex.toEdges.clear()
+            // 删除edges的边
+
             // 删除顶点
             this.vertices.delete(value)
         }
@@ -152,15 +154,22 @@ class Graph<V, W> implements IGraph<V, W> {
         let toVertex = this.vertices.get(to)
         // 起点和终点同时存在才删除 from -> to
         if (fromVertex && toVertex) {
-            // from的出度 toEdges
+            // 删除from顶的出度 toEdges
             let toEdges = fromVertex.toEdges
             let toEdgesItem = this.getEdgeFromVertex(toEdges, from, to)
-            if(toEdgesItem === null) return null
-            toEdges.delete(toEdgesItem)
-            return toEdgesItem
-            // to的入度 TODO
+            if(toEdgesItem !== null) toEdges.delete(toEdgesItem)
+            // 删除to顶点的入度 TODO
+            let fromEdges = fromVertex.fromEdges
+            let fromEdgesItem = this.getEdgeFromVertex(fromEdges, from, to)
+            if(fromEdgesItem !== null) fromEdges.delete(fromEdgesItem)
 
+            // 删除edges的边
+            let edgesItem = this.getEdgeFromVertex(this.edges, from, to)
+            if(edgesItem) this.edges.delete(edgesItem)
+            
+            return toEdgesItem
         }
+        return null
     }
     // 根据顶点获取一条边
     private getEdgeFromVertex(edges: Set<Edge<V, W>>, from: V, to: V) {
