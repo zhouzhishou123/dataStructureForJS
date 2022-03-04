@@ -4,13 +4,18 @@
  * @Description:
  */
 
-// import BinaryHeap from './package/Heap/BinaryHeap'
-// function compare<T>(a: T, b: T): number {
-//     if (a === b) return 0;
-//     if (a > b) return -1;
-//     if (a < b) return 1;
-//   }
-// let data:number[] = [88,44,53,41,16,6,70,18,85,98,81,23,36,43,37]
-// const binaryHeap = new BinaryHeap(data, compare)
-// console.log(binaryHeap.elements);
-import './leetcode/BinaryTree/balance-a-binary-search-tree'
+import Graph from './package/Graph/Graph'
+
+let graph = new Graph()
+
+
+graph.addEdge('V0', 'V4', 6)
+graph.addEdge('V1', 'V0', 9)
+graph.addEdge('V1', 'V2', 3)
+graph.addEdge('V2', 'V3', 5)
+graph.addEdge('V3', 'V4', 1)
+graph.addEdge('V2', 'V0', 2)
+
+
+graph.removeEdge('V1', 'V2')
+console.log(graph);

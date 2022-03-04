@@ -1,7 +1,7 @@
 /*
  * @Author: zhouzhishou
  * @Date: 2022-02-28 11:23:05
- * @LastEditTime: 2022-03-03 18:28:32
+ * @LastEditTime: 2022-03-04 11:11:47
  * @Description: 1382. 将二叉搜索树变平衡 https://leetcode-cn.com/problems/balance-a-binary-search-tree/
  */
 
@@ -112,6 +112,7 @@ class BST<T> {
             this.afterRemove(node)
             this.size--
         } else if (node.hasTwoChild()) {
+            
             //后继节点
             let successorNode = this.successorNode(val)
             node.val = successorNode.val
@@ -119,17 +120,21 @@ class BST<T> {
             if (successorNode.right) {
                 successorNode.right.parent = node
             }
-            successorNode = null
-            this.afterRemove(node)
+            this.afterRemove(successorNode)
             this.size--
         } else { // 删除度为1的节点
+            let s = node.left
             if (node.isLeftNode()) {
                 node.val = node.left.val
+                node.left = node.left.left
             }
             if (node.isRightNode) {
+                s = node.right
                 node.val = node.right.val
+                this.afterRemove(node.right)
+                node.right = node.right.right
             }
-            this.afterRemove(node)
+            this.afterRemove(s)
             this.size--
         }
 
@@ -346,15 +351,20 @@ class AVLTreeNode<T> extends TreeNode<T> {
 
 
 const avlTree = new AVLTree((a, b) => a - b)
+// 100 98 123 92 99 124 91
 avlTree.create(100)
-avlTree.create(120)
 avlTree.create(98)
-avlTree.create(95)
+avlTree.create(123)
+avlTree.create(92)
+avlTree.create(99)
+avlTree.create(124)
+avlTree.create(91)
+avlTree.create(121)
 
 // avlTree.create(17)
 // avlTree.create(11)
 
-avlTree.remove(120)
+avlTree.remove(123)
 
 console.log(avlTree);
 
