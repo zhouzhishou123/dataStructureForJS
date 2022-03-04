@@ -1,7 +1,7 @@
 /*
  * @Author: zhouzhishou
  * @Date: 2022-02-28 11:23:05
- * @LastEditTime: 2022-03-02 17:39:28
+ * @LastEditTime: 2022-03-04 11:11:47
  * @Description: 1382. 将二叉搜索树变平衡 https://leetcode-cn.com/problems/balance-a-binary-search-tree/
  */
 
@@ -55,7 +55,7 @@ class BST<T> {
         this.root = null
         this.comparator = comparator
     }
-    afterAdd(node) { }
+    afterAdd(node: INode<T> | TreeNode<T> ) { }
     // 创建节点
     createNode(val: T, parent) {
         return new TreeNode(val, parent)
@@ -92,6 +92,7 @@ class BST<T> {
             this.afterAdd(node)
         }
     }
+    afterRemove(node: INode<T> | TreeNode<T>) { }
     // 删除
     remove(val: T): INode<T> {
         let node = this.search(val)
@@ -108,9 +109,10 @@ class BST<T> {
             if (node.parent.right === node) {
                 node.parent.right = null
             }
-            node = null
+            this.afterRemove(node)
             this.size--
         } else if (node.hasTwoChild()) {
+            
             //后继节点
             let successorNode = this.successorNode(val)
             node.val = successorNode.val
@@ -118,15 +120,21 @@ class BST<T> {
             if (successorNode.right) {
                 successorNode.right.parent = node
             }
-            successorNode = null
+            this.afterRemove(successorNode)
             this.size--
-        } else { // // 删除度为1的节点
+        } else { // 删除度为1的节点
+            let s = node.left
             if (node.isLeftNode()) {
                 node.val = node.left.val
+                node.left = node.left.left
             }
             if (node.isRightNode) {
+                s = node.right
                 node.val = node.right.val
+                this.afterRemove(node.right)
+                node.right = node.right.right
             }
+            this.afterRemove(s)
             this.size--
         }
 
@@ -230,6 +238,18 @@ class AVLTree<T> extends BST<T>{
             parent = parent.parent
         }
     }
+    afterRemove(node) {
+        let parent = node.parent
+        while (parent !== null) {
+            if (parent.isBalanced()) {
+                // 更新高度
+                this.updateHeight(parent)
+            } else {
+                this.reBalanced(parent)
+            }
+            parent = parent.parent
+        }
+    }
     reBalanced(grand) {
         let parent = grand.tallerChild()
         let node = parent.tallerChild()
@@ -241,7 +261,6 @@ class AVLTree<T> extends BST<T>{
             this.rotateRight(parent)
             this.rotateLeft(grand)
         } else {
-            console.log('LR');
             this.rotateLeft(parent)
             this.rotateRight(grand)
         }
@@ -250,7 +269,7 @@ class AVLTree<T> extends BST<T>{
         let parent = grand.right
         let child = parent.left
         parent.left = grand
-        grand.right =child
+        grand.right = child
         this.afterRotae(grand, parent, child)
     }
     rotateRight(grand) {
@@ -332,15 +351,20 @@ class AVLTreeNode<T> extends TreeNode<T> {
 
 
 const avlTree = new AVLTree((a, b) => a - b)
+// 100 98 123 92 99 124 91
 avlTree.create(100)
-avlTree.create(60)
-avlTree.create(101)
-avlTree.create(58)
-avlTree.create(65)
-avlTree.create(66)
+avlTree.create(98)
+avlTree.create(123)
+avlTree.create(92)
+avlTree.create(99)
+avlTree.create(124)
+avlTree.create(91)
+avlTree.create(121)
+
 // avlTree.create(17)
 // avlTree.create(11)
 
-// avlTree.remove(5)
+avlTree.remove(123)
 
 console.log(avlTree);
+

@@ -1,7 +1,7 @@
 /*
  * @Author: zhouzhishou
  * @Date: 2021-05-10 10:48:02
- * @LastEditTime: 2022-02-25 22:36:21
+ * @LastEditTime: 2022-03-04 11:08:40
  * @Description: 二叉搜索树
  */
 import BinaryTree from '../Tree/BinaryTree'
@@ -55,7 +55,7 @@ class BinarySearchTree<T> extends BinaryTree<T> implements IBinarySearchTree<T> 
     }
     return null;
   }
-  protected afterAdd<T>(node: AVLNode<T>): void { }
+  protected afterAdd<T>(node: Node<T> | AVLNode<T>): void { }
 
   protected createNode(key: T, parent: INode<T> | null): INode<T> {
     return new Node(key, parent)
@@ -130,7 +130,6 @@ class BinarySearchTree<T> extends BinaryTree<T> implements IBinarySearchTree<T> 
         } else {
           node.parent.right = replaceNode;
         }
-        this.afterRemove(node)
       } else {
         // 度为 0
         if (node.parent === null) { //叶子节点根节点
@@ -139,8 +138,8 @@ class BinarySearchTree<T> extends BinaryTree<T> implements IBinarySearchTree<T> 
         };
         if (node === node.parent.right) node.parent.right = null; // 叶子节点
         if (node === node.parent.left) node.parent.left = null;
-        this.afterRemove(node)
       }
+      this.afterRemove(node)
     }
 
     if (node.hasTwoNode()) {
@@ -154,7 +153,7 @@ class BinarySearchTree<T> extends BinaryTree<T> implements IBinarySearchTree<T> 
     }
     deleteNode(node);
   }
-  afterRemove(node: AVLNode<T>){}
+  afterRemove(node: Node<T> | AVLNode<T>){}
 }
 
 export default BinarySearchTree;
