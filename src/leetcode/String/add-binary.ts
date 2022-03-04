@@ -27,7 +27,7 @@
         }
     }
      while(p>=0){
-         sum += a[p] * 1 + b[p] * 1 
+         sum += (a[p] as any) * 1 + (b[p] as any) * 1 
          if(sum >= 2){
             str += sum-2
             sum = 1
