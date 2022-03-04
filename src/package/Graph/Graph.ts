@@ -147,7 +147,7 @@ class Graph<V, W> implements IGraph<V, W> {
      * @return {*}
      * @Description: 删除一条边并返回
      */
-    removeEdge(from: V, to: V): void {
+    removeEdge(from: V, to: V): Edge<V, W> {
         let fromVertex = this.vertices.get(from)
         let toVertex = this.vertices.get(to)
         // 起点和终点同时存在才删除 from -> to
@@ -163,7 +163,7 @@ class Graph<V, W> implements IGraph<V, W> {
         }
     }
     // 根据顶点获取一条边
-    private getEdgeFromVertex(edges, from: V, to: V) {
+    private getEdgeFromVertex(edges: Set<Edge<V, W>>, from: V, to: V) {
         let iterator = edges.values()
         for (let item of iterator) {
             if (item.from.value === from && item.to.value === to) {
