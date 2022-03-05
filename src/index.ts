@@ -15,8 +15,8 @@ graph.addEdge('V1', 'V2', 3)
 graph.addEdge('V2', 'V3', 5)
 graph.addEdge('V3', 'V4', 1)
 graph.addEdge('V2', 'V0', 2)
+// console.log(graph);
 
-
-// graph.removeEdge('V1', 'V2')
-graph.removeVertex('V3')
-console.log(graph);
+graph.BFS('V1', (v)=>{
+    console.log(v);
+})

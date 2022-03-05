@@ -138,11 +138,25 @@ class Graph<V, W> implements IGraph<V, W> {
             // 删除出度的边
             vertex.toEdges.clear()
             // 删除edges的边
-
+            this.removeEdgeByVertex(value)
             // 删除顶点
             this.vertices.delete(value)
         }
         return vertex
+    }
+    /**
+     * @param {V} value
+     * @return {*}
+     * @Description: 删除以value为顶点的所有边
+     */
+    private removeEdgeByVertex(value: V): void {
+        let toEdgeIterator = this.edges.values()
+        for (let item of toEdgeIterator) {
+            // 找到所有以value出入度的边并删除
+            if (item.from.value === value || item.to.value === value) {
+                this.edges.delete(item)
+            }
+        }
     }
     /**
      * @param {*}
@@ -157,16 +171,16 @@ class Graph<V, W> implements IGraph<V, W> {
             // 删除from顶的出度 toEdges
             let toEdges = fromVertex.toEdges
             let toEdgesItem = this.getEdgeFromVertex(toEdges, from, to)
-            if(toEdgesItem !== null) toEdges.delete(toEdgesItem)
+            if (toEdgesItem !== null) toEdges.delete(toEdgesItem)
             // 删除to顶点的入度 TODO
             let fromEdges = fromVertex.fromEdges
             let fromEdgesItem = this.getEdgeFromVertex(fromEdges, from, to)
-            if(fromEdgesItem !== null) fromEdges.delete(fromEdgesItem)
+            if (fromEdgesItem !== null) fromEdges.delete(fromEdgesItem)
 
             // 删除edges的边
             let edgesItem = this.getEdgeFromVertex(this.edges, from, to)
-            if(edgesItem) this.edges.delete(edgesItem)
-            
+            if (edgesItem) this.edges.delete(edgesItem)
+
             return toEdgesItem
         }
         return null
@@ -196,6 +210,46 @@ class Graph<V, W> implements IGraph<V, W> {
      */
     verticesSize(): number {
         return this.vertices.size
+    }
+    /**
+     * @param {V} value
+     * @param {function} callback
+     * @return {*}
+     * @Description: 广度优先遍历
+     */
+    BFS(value: V, callback: (v: Vertex<V, W>) => void): void {
+        let vertex = this.vertices.get(value)
+        if (!vertex) return
+        let set: Set<Vertex<V, W>> = new Set()
+        let queue = [vertex]
+        set.add(vertex)
+        while (queue.length > 0) {
+            let _vertex = queue.pop()
+            callback(_vertex)
+            let toEdgesIterator = _vertex.toEdges.values()
+            for (let item of toEdgesIterator) {
+                if (set.has(item.to)) continue
+                queue.unshift(item.to)
+                set.add(item.to)
+            }
+        }
+    }
+    /**
+     * @param {V} value
+     * @param {function} callback
+     * @return {*}
+     * @Description: 深度优先遍历
+     */
+    DFS(value: V, callback: (v: Vertex<V, W>) => void, set: Set<Vertex<V, W>> = new Set()): void {
+        let vertex = this.vertices.get(value)
+        if (!vertex) return
+        callback(vertex)
+        set.add(vertex)
+        let toEdgesIterator = vertex.toEdges.values()
+        for (let item of toEdgesIterator) {
+            if (set.has(item.to)) continue
+            this.DFS(item.to.value, callback, set)
+        }
     }
 }
 
