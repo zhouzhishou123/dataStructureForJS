@@ -18,5 +18,7 @@ graph.addEdge('V2', 'V0', 2)
 // console.log(graph);
 
 graph.BFS('V1', (v)=>{
+    if(v.value==='V4') return true
     console.log(v);
+    return false
 })

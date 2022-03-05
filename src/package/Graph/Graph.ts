@@ -11,6 +11,8 @@ interface IVertex<V, W> {
     toEdges: Set<Edge<V, W>> // 出度
 }
 
+type Callback<V, W> = (v: Vertex<V, W>) => boolean
+
 // 边的接口定义
 interface IEdge<V, W> {
     from: Vertex<V, W> // 开始的顶点
@@ -217,7 +219,7 @@ class Graph<V, W> implements IGraph<V, W> {
      * @return {*}
      * @Description: 广度优先遍历
      */
-    BFS(value: V, callback: (v: Vertex<V, W>) => void): void {
+    BFS(value: V, callback: Callback<V, W>): void {
         let vertex = this.vertices.get(value)
         if (!vertex) return
         let set: Set<Vertex<V, W>> = new Set()
@@ -225,11 +227,11 @@ class Graph<V, W> implements IGraph<V, W> {
         set.add(vertex)
         while (queue.length > 0) {
             let _vertex = queue.shift()
-            callback(_vertex)
+            if (callback(_vertex)) break
             let toEdgesIterator = _vertex.toEdges.values()
             for (let item of toEdgesIterator) {
                 if (set.has(item.to)) continue
-                queue.unshift(item.to)
+                queue.push(item.to)
                 set.add(item.to)
             }
         }
@@ -240,10 +242,10 @@ class Graph<V, W> implements IGraph<V, W> {
      * @return {*}
      * @Description: 深度优先遍历
      */
-    DFS(value: V, callback: (v: Vertex<V, W>) => void, set: Set<Vertex<V, W>> = new Set()): void {
+    DFS(value: V, callback: Callback<V, W>, set: Set<Vertex<V, W>> = new Set()): void {
         let vertex = this.vertices.get(value)
         if (!vertex) return
-        callback(vertex)
+        if (callback(vertex)) return
         set.add(vertex)
         let toEdgesIterator = vertex.toEdges.values()
         for (let item of toEdgesIterator) {
