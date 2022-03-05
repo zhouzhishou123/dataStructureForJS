@@ -224,7 +224,7 @@ class Graph<V, W> implements IGraph<V, W> {
         let queue = [vertex]
         set.add(vertex)
         while (queue.length > 0) {
-            let _vertex = queue.pop()
+            let _vertex = queue.shift()
             callback(_vertex)
             let toEdgesIterator = _vertex.toEdges.values()
             for (let item of toEdgesIterator) {
