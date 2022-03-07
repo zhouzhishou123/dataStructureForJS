@@ -31,7 +31,6 @@ class UnioFind_QF implements IUnioFind<number> {
         // v2的父节点
         let p2 = this.find(v2)
         if (p1 === p2) return
-        this.parents[v1] = p2
         for (let i = 0; i < this.parents.length; i++) {
             // 如果其他集合的父节点是v1的父节点则都更新成v2的父节点
             if (this.parents[i] === p1) {
