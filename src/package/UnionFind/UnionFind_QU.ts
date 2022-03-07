@@ -1,7 +1,7 @@
 /*
  * @Author: zhouzhishou
  * @Date: 2022-03-07 19:33:14
- * @LastEditTime: 2022-03-07 19:40:25
+ * @LastEditTime: 2022-03-07 20:00:24
  * @Description: 
  */
 
@@ -23,14 +23,15 @@ class UnioFind_QU implements IUnioFind<number> {
             this.parents[parents[i]] = parents[i]
         }
     }
-    find (v: number) {
+    find(v: number) {
 
     }
     /**
      * 让v1 的根节点指向v2 的根节点
      */
-    union (v1: number, v2: number) {
-        
+    union(v1: number, v2: number) {
+        let p = this.parents[v1]
+
     }
     /**
      * 集合v1和集合v2是否在同一个集合
