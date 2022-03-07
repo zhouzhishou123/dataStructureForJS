@@ -3,7 +3,6 @@
  * @Date: 2022-03-06 14:23:18
  * @Description: 并查集的接口定义
  */
-
 export interface IUnioFind<V> {
     /**
      * 查找v所属的集合的根节点
@@ -18,6 +17,7 @@ export interface IUnioFind<V> {
      */
     isSame:(v1:V,v2:V)=> boolean
 }
+
 export interface Node<V> {
     value: V
     rank: number

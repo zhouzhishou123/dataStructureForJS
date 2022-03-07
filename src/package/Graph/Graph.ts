@@ -76,7 +76,7 @@ class Graph<V, W> implements IGraph<V, W> {
         // debugger
         // 获取边的起点
         let fromVertex = this.vertices.get(from)
-
+  
         // 如果起点为空那么创建一个顶点
         if (!fromVertex) {
             fromVertex = new Vertex(from)

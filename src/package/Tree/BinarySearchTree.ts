@@ -1,7 +1,7 @@
 /*
  * @Author: zhouzhishou
  * @Date: 2021-05-10 10:48:02
- * @LastEditTime: 2022-03-04 11:08:40
+ * @LastEditTime: 2022-03-07 18:01:24
  * @Description: 二叉搜索树
  */
 import BinaryTree from '../Tree/BinaryTree'
@@ -153,7 +153,7 @@ class BinarySearchTree<T> extends BinaryTree<T> implements IBinarySearchTree<T> 
     }
     deleteNode(node);
   }
-  afterRemove(node: Node<T> | AVLNode<T>){}
+  afterRemove(node: Node<T> | AVLNode<T>) { }
 }
 
 export default BinarySearchTree;
