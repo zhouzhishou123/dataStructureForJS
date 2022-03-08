@@ -58,6 +58,7 @@ class UnioFind<V> implements IUnioFind<V> {
         if (p1 === p2) return
         if (p1.rank === p2.rank) {
             p1.parent = p2
+            p2.rank += 1
         } else if (p1.rank > p2.rank) {
             p2.parent = p1
         } else {
