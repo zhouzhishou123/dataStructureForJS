@@ -18,8 +18,8 @@ export interface IUnioFind<V> {
     isSame:(v1:V,v2:V)=> boolean
 }
 
-export interface Node<V> {
+export interface INode<V> {
     value: V
     rank: number
-    parent: Node<V>
+    parent: INode<V>
 }

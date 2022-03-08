@@ -1,7 +1,7 @@
 /*
  * @Author: zhouzhishou
  * @Date: 2022-03-07 19:33:14
- * @LastEditTime: 2022-03-07 22:40:53
+ * @LastEditTime: 2022-03-08 15:51:34
  * @Description: Quick Union 查找(Find)的时间复杂度O(logn) 可以优化到O(α(n)),α(n)\
  *               合并的时间复杂度O(n)
  */
@@ -11,12 +11,12 @@ import { IUnioFind } from './Declare'
 class UnioFind_QU implements IUnioFind<number> {
     parents: number[] = []
     constructor(parents: number[]) {
-        this.makeSet(parents)
-    }
-    makeSet(parents: number[]) {
         for (let i = 0; i < parents.length; i++) {
-            this.parents[parents[i]] = parents[i]
+            this.makeSet(parents[i])
         }
+    }
+    makeSet(v: number) {
+        this.parents[v] = v
     }
     find(v: number) {
         while(v!== this.parents[v]){

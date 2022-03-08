@@ -9,12 +9,12 @@ import { IUnioFind } from './Declare'
 class UnioFind_QF implements IUnioFind<number> {
     parents: number[] = []
     constructor(parents: number[]) {
-        this.makeSet(parents)
-    }
-    makeSet(parents: number[]) {
         for (let i = 0; i < parents.length; i++) {
-            this.parents[parents[i]] = parents[i]
+            this.makeSet(parents[i])
         }
+    }
+    makeSet(v: number) {
+        this.parents[v] = v
     }
     /**
      * 找到v所在的根节点
