@@ -19,7 +19,7 @@ class Node<T> implements INode<T> {
 }
 
 class UnioFind<V> implements IUnioFind<V> {
-    parents: Map<V, Node<V>> = new Map()
+    collections: Map<V, Node<V>> = new Map()
     constructor(parents: V[]) {
         for (let i = 0; i < parents.length; i++) {
             this.makeSet(parents[i])
@@ -31,7 +31,7 @@ class UnioFind<V> implements IUnioFind<V> {
      * @return {*}
      */
     makeSet(v: V): void {
-        this.parents.set(v, new Node(v))
+        this.collections.set(v, new Node(v))
     }
     /**
      * @description: 找到v所在集合的根节点
@@ -39,7 +39,7 @@ class UnioFind<V> implements IUnioFind<V> {
      * @return {*}
      */
     find(v: V): Node<V> {
-        let value = this.parents.get(v)
+        let value = this.collections.get(v)
         if (!value) return
         while (value !== value.parent) {
             value = value.parent
