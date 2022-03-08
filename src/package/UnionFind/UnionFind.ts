@@ -65,6 +65,12 @@ class UnioFind<V> implements IUnioFind<V> {
             p1.parent = p2
         }
     };
+    /**
+     * @description: 元素v1与元素v2是否在一个集合
+     * @param {V} v1
+     * @param {V} v2
+     * @return {*}
+     */    
     isSame(v1: V, v2: V): boolean {
         let p1 = this.find(v1)
         let p2 = this.find(v2)
