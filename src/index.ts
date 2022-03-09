@@ -12,6 +12,6 @@ let unioFind = new UnioFind(c)
 unioFind.union(0, 1)
 unioFind.union(2, 1)
 unioFind.union(3, 4)
-unioFind.union(1, 4)
+unioFind.union(1, 4)                  
 
 console.log(unioFind);
