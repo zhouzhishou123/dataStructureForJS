@@ -12,7 +12,9 @@ abstract class Sort {
     private swapCount: number = 0
     constructor(arr: number[]) {
         if (arr.length === 0 || arr.length < 2) return
-        this.array = arr
+        for(let i=0;i<arr.length;i++){
+            this.array[i] = arr[i]
+        }
         this.sort()
     }
     protected abstract sort(): void
@@ -33,7 +35,7 @@ abstract class Sort {
      * @Description: 交换两个元素的位置
      */    
     protected swap(i1: number, i2: number):void {
-        this.swapCount
+        this.swapCount++
         [this.array[i1], this.array[i2]] = [this.array[i2], this.array[i1]]
     }
 }
