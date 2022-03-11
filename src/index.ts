@@ -7,9 +7,11 @@
 import BubbleSort from './Algorithms/Sort/BubbleSort'
 import SelectionSort from './Algorithms/Sort/SelectionSort'
 import HeapSort from './Algorithms/Sort/HeapSort'
-import {genRandomNums} from './util/index'
+import InsertSort from './Algorithms/Sort/InsertSort'
+import { genRandomNums, binarySearch, isOrder } from './util/index'
 
-let arr= genRandomNums(10,100,15)
-let heapSort = new HeapSort(arr)
+let arr = genRandomNums(10, 100, 15)
+let insertSort = new InsertSort(arr)
 
-console.log(heapSort);
+console.log(insertSort);
+
