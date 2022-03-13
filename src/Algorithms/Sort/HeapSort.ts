@@ -19,14 +19,14 @@ class HeapSort extends Sort {
         }
     }
     heapify() {
-        for (let i = ((this.array.length >> 1) - 1); i >= 0; i--) {
+        for (let i = ((this.heapSize >> 1) - 1); i >= 0; i--) {
             this.siftDown(i)
         }
     }
     siftDown(index: number) {
         let element = this.array[index]
         // 第一个叶子节点的索引
-        let leafIndex = Math.floor(this.array.length >> 1)
+        let leafIndex = Math.floor(this.heapSize >> 1)
         while (index < leafIndex) {
             let leftNodeIndex = (index << 1) + 1
             let leftNode = this.array[leftNodeIndex]
@@ -34,7 +34,7 @@ class HeapSort extends Sort {
             let rightNode = this.array[rightNodeIndex]
 
             // 右子节点存在并且大于左子节点
-            if (rightNodeIndex < this.array.length && rightNode > leftNode) {
+            if (rightNodeIndex < this.heapSize && rightNode > leftNode) {
                 leftNodeIndex = rightNodeIndex
                 leftNode = rightNode
             }
