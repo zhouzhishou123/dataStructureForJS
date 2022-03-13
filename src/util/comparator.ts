@@ -1,7 +1,7 @@
 /*
  * @Author: zhouzhishou
  * @Date: 2022-02-24 14:45:58
- * @LastEditTime: 2022-02-24 14:45:59
+ * @LastEditTime: 2022-03-11 14:54:34
  * @Description: 
  */
 export type ICompareFn<T> = (a: T, b: T) => number;

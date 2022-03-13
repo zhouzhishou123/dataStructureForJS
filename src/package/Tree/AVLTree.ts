@@ -1,7 +1,7 @@
 /*
  * @Author: zhouzhishou
  * @Date: 2022-02-24 14:35:39
- * @LastEditTime: 2022-02-25 22:39:15
+ * @LastEditTime: 2022-03-11 13:48:29
  * @Description: AVL树
  */
 
@@ -17,7 +17,7 @@ class AVLTree<T> extends BinarySearchTree<T> implements IAVLTree<T> {
      * @param {AVLNode} parent
      * @return {*}
      * @Description: 
-     */    
+     */
     createNode(key: T, parent: AVLNode<T> | null): AVLNode<T> {
         return new AVLNode(key, parent)
     }
@@ -25,7 +25,7 @@ class AVLTree<T> extends BinarySearchTree<T> implements IAVLTree<T> {
      * @param {AVLNode} node
      * @return {*}
      * @Description: 
-     */    
+     */
     private isBalanced<T>(node: AVLNode<T>): boolean {
         return Math.abs(node.balanceFactor()) <= 1
     }
@@ -33,8 +33,8 @@ class AVLTree<T> extends BinarySearchTree<T> implements IAVLTree<T> {
      * @param {AVLNode} node
      * @return {*}
      * @Description: 
-     */    
-    updateHeight(node: AVLNode<T>) {
+     */
+    updateHeight(node: AVLNode<T>):void {
         let avlNode = node
         avlNode.updateHeight()
     }
@@ -42,7 +42,7 @@ class AVLTree<T> extends BinarySearchTree<T> implements IAVLTree<T> {
      * @param {any} node
      * @return {*}
      * @Description: 
-     */    
+     */
     afterAdd(node: any): void {
         while ((node = node.parent) !== null) {
             if (this.isBalanced(node)) {
@@ -59,7 +59,7 @@ class AVLTree<T> extends BinarySearchTree<T> implements IAVLTree<T> {
      * @param {any} node
      * @return {*}
      * @Description: 
-     */    
+     */
     afterRemove(node: any): void {
         while ((node = node.parent) !== null) {
             if (this.isBalanced(node)) {
@@ -72,7 +72,7 @@ class AVLTree<T> extends BinarySearchTree<T> implements IAVLTree<T> {
         }
     }
     /**
-     * @param {*} node
+     * @param {*} grand
      * @return {*}
      * @Description: 
      */
@@ -96,7 +96,7 @@ class AVLTree<T> extends BinarySearchTree<T> implements IAVLTree<T> {
         }
     }
     /**
-     * @param {*} node
+     * @param {*} grand
      * @return {*}
      * @Description: 左旋转
      */
@@ -106,10 +106,10 @@ class AVLTree<T> extends BinarySearchTree<T> implements IAVLTree<T> {
         grand.right = child
         parent.left = grand
 
-        this.afterRotate(grand,parent as AVLNode<T>,child as AVLNode<T>)
+        this.afterRotate(grand, parent as AVLNode<T>, child as AVLNode<T>)
     }
     /**
-     * @param {*} node
+     * @param {*} grand
      * @return {*}
      * @Description: 右旋转
      */
@@ -119,7 +119,7 @@ class AVLTree<T> extends BinarySearchTree<T> implements IAVLTree<T> {
         grand.left = child
         parent.right = grand
 
-        this.afterRotate(grand,parent as AVLNode<T>,child as AVLNode<T>)
+        this.afterRotate(grand, parent as AVLNode<T>, child as AVLNode<T>)
     }
     /**
      * @param {AVLNode} grand
@@ -127,18 +127,18 @@ class AVLTree<T> extends BinarySearchTree<T> implements IAVLTree<T> {
      * @param {AVLNode} child
      * @return {*}
      * @Description: 
-     */    
-    private afterRotate(grand: AVLNode<T>,parent: AVLNode<T>,child: AVLNode<T>){
+     */
+    private afterRotate(grand: AVLNode<T>, parent: AVLNode<T>, child: AVLNode<T>): void {
         parent.parent = grand.parent
-        if(grand.isLeftChild()){ // 修改parent为父节点
+        if (grand.isLeftChild()) { // 修改parent为父节点
             grand.parent.left = parent
-        }else if(grand.isRightChild()) {
+        } else if (grand.isRightChild()) {
             grand.parent.right = parent
-        }else { // 根节点
+        } else { // 根节点
             this.root = parent
         }
         // 更新child的父节点
-        if(child!==null){
+        if (child !== null) {
             child.parent = grand
         }
 
