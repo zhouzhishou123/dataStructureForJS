@@ -45,13 +45,12 @@ class QuickSort extends Sort {
                     break
                 }
             }
-
             while (begin < end) {
                 // 从begin位置开始搜索和轴点元素比较
                 if (this.array[begin] < pivot) {
                     begin++
                 } else { // begin位置的元素大于轴点元素则覆盖end位置的元素
-                    this.array[begin] = this.array[end]
+                    this.array[end] = this.array[begin]
                     end--
                     break
                 }
