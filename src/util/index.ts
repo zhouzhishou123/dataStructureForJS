@@ -75,3 +75,15 @@ export function binarySearch<T>(arr: T[], v: T, compareFn: ICompareFn<T> = defau
   }
   return -1
 }
+
+
+// 最大值
+function getMax(arr:number[], begin:number, end:number):number {
+  if (end - begin < 2) return arr[begin]
+  let mid = (end + begin) >> 1
+  return Math.max(getMax(arr, begin, mid), getMax(arr, mid, end))
+}
+
+export function max(arr:number[]):number {
+  return getMax(arr, 0, arr.length)
+}
