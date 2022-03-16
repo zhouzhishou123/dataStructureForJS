@@ -112,4 +112,3 @@ class CoinsChange {
         }
     }
 }
-console.log(new CoinsChange().minCoins3(19));

@@ -1,21 +1,9 @@
 /*
  * @Author: zhouzhishou
  * @Date: 2022-03-16 17:15:30
- * @LastEditTime: 2022-03-16 17:57:44
+ * @LastEditTime: 2022-03-16 20:17:40
  * @Description: 300. 最长递增子序列  https://leetcode-cn.com/problems/longest-increasing-subsequence/
  */
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /**
@@ -56,8 +44,6 @@ var lengthOfLIS = function (nums: number[]):number {
         }
         maxLen = Math.max(maxLen, dp[i])
     }
-    console.log(dp);
-
     return maxLen
 };
 
