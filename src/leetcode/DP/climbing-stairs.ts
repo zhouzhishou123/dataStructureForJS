@@ -1,7 +1,7 @@
 /*
  * @Author: zhouzhishou
  * @Date: 2022-03-17 15:35:12
- * @LastEditTime: 2022-03-17 16:42:45
+ * @LastEditTime: 2022-03-18 12:51:03
  * @Description: 70. 爬楼梯 https://leetcode-cn.com/problems/climbing-stairs/
  */
 
@@ -17,9 +17,6 @@ class ClimbingStairs {
         return dp[n]
     }
 }
-console.log(new ClimbingStairs().climbingStairs(3));
-
-
 /**
  * 定义状态
     dp(n) 爬到n阶的方法种数
