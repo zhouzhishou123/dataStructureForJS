@@ -4,7 +4,7 @@
  * @LastEditTime: 2022-02-17 22:49:05
  * @Description:  剑指 Offer II 024. 反转链表 https://leetcode-cn.com/problems/UHnkqh/
  */
-import { ListNode, IListNode} from './ListNode'
+import { ListNode, IListNode} from '../ListNode'
 
 
 // 1-> 2-> 3-> 4-> 5

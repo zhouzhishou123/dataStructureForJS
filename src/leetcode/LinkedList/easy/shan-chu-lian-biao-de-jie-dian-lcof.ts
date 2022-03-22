@@ -17,7 +17,7 @@ let node2 = new ListNode<number>(5, node3)
 let node1 = new ListNode<number>(-3, node2)
 
 
-import { ListNode, IListNode} from './ListNode'
+import { ListNode, IListNode} from '../ListNode'
 
 function deleteNode<T>(head:IListNode<T>, val:T) {
     if(head === null) return null

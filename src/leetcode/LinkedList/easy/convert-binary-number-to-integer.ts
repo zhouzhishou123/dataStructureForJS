@@ -10,7 +10,7 @@
  * 请你返回该链表所表示数字的 十进制值 。
  */
 
-import { ListNode, IListNode } from './ListNode'
+import { ListNode, IListNode } from '../ListNode'
 
 let node3 = new ListNode<number>(0, null)
 let node2 = new ListNode<number>(0, node3)

@@ -4,7 +4,7 @@
  * @Description: 876. 链表的中间结点 https://leetcode-cn.com/problems/middle-of-the-linked-list/
  */
 
-import { ListNode, IListNode} from './ListNode'
+import { ListNode, IListNode} from '../ListNode'
 
 // 1-> 2-> 3-> 4-> 5
 let node4 = new ListNode<number>(-4, null)

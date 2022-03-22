@@ -5,7 +5,7 @@
  * @Description: 面试题 02.03. 删除中间节点 https://leetcode-cn.com/problems/delete-middle-node-lcci/
  */
 
-import { ListNode, IListNode} from './ListNode'
+import { ListNode, IListNode} from '../ListNode'
 
 // 4-> 5-> 1-> 9-> null
 let node4 = new ListNode<number>(9, null)

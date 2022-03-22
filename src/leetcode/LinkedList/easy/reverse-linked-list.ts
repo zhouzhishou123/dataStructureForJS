@@ -22,7 +22,7 @@ interface INode {
   return newHead;
 };
 
-import { ListNode, IListNode} from './ListNode'
+import { ListNode, IListNode} from '../ListNode'
 
 let node5 = new ListNode<number>(5, null)
 let node4 = new ListNode<number>(4, node5)
