@@ -1,7 +1,7 @@
 /*
  * @Author: zhouzhishou
  * @Date: 2021-05-13 14:53:10
- * @LastEditTime: 2022-02-26 12:33:22
+ * @LastEditTime: 2022-03-25 01:12:19
  * @Description:
  */
 import { ICompareFn } from './comparator'
@@ -136,7 +136,7 @@ export interface IHeap<T> {
   isEmpty:()=> boolean
 }
 
-export function TreeNode<T>(val: T, left: INode<T>, right: INode<T>) {
+export function TreeNode<T>(val: T, left?: INode<T>, right?: INode<T>) {
   this.val = val === undefined ? 0 : val;
   this.left = left === undefined ? null : left;
   this.right = right === undefined ? null : right;
