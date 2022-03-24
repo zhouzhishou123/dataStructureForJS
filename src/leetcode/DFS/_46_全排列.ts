@@ -35,4 +35,4 @@ function DFSpermutation(index, nums, list, permutationList, used): void {
     }
 }
 
-console.log(permute([1,2,3]));
+console.log(permute([1,2,3,4]));
