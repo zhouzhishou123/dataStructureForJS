@@ -9,6 +9,7 @@
 
 /**
  * 利用栈求左右两边第一个比他大的值 （单调递减栈）
+ * 利用栈求左右两边第一个比他小的值 （单调递增栈）
  */
 
 function parentIndex(nums: number[]) {
@@ -30,22 +31,24 @@ function parentIndex(nums: number[]) {
         stack.push(i)
     }
     let pis = []
-    for(let i=0; i<nums.length;i++){
-        if(lis[i] === -1 && ris[i]===-1){
-            pis[i] =-1
+    for (let i = 0; i < nums.length; i++) {
+        if (lis[i] === -1 && ris[i] === -1) {
+            pis[i] = -1
             continue
         }
-        if(lis[i] === -1){
+        if (lis[i] === -1) {
             pis[i] = ris[i]
-        }else if(ris[i]===-1){
+        } else if (ris[i] === -1) {
             pis[i] = lis[i]
-        }else if(nums[lis[i]]< nums[ris[i]]){
+        } else if (nums[lis[i]] < nums[ris[i]]) {
             pis[i] = lis[i]
-        }else {
+        } else {
             pis[i] = ris[i]
         }
     }
     return pis
 }
 
-console.log(parentIndex([3, 2, 1, 6, 0, 5]));
+// console.log(parentIndex([3, 2, 1, 6, 0, 5]));
+
+
