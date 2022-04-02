@@ -1,7 +1,7 @@
 /*
  * @Author: zhouzhishou
  * @Date: 2021-05-13 14:53:10
- * @LastEditTime: 2022-03-25 01:12:19
+ * @LastEditTime: 2022-03-31 22:05:31
  * @Description:
  */
 import { ICompareFn } from './comparator'
@@ -54,6 +54,10 @@ export interface IAVLNode<T> extends INode<T> {
   tallerChild: () => AVLNode<T>
 }
 
+export interface IRBNode<T> extends INode<T> {
+  color: boolean
+}
+
 /**
  * @param {*}
  * @return {*}
@@ -74,11 +78,30 @@ export class Node<T> implements INode<T> {
   hasTwoNode() {
     return this.right !== null && this.left !== null;
   }
-  isLeftChild() {
+  isLeftChild(): boolean {
     return this.parent !== null && this === this.parent.left
   }
-  isRightChild() {
+  /**
+   * @param {*}
+   * @return {*}
+   * @Description: 父节点的右子节点
+   */
+  isRightChild(): boolean {
     return this.parent !== null && this === this.parent.right
+  }
+  /**
+   * @param {*}
+   * @return {*}
+   * @Description: 兄弟节点
+   */
+  sibling(): INode<T> {
+    if (this.isRightChild()) {
+      return this.parent.left
+    }
+    if (this.isLeftChild()) {
+      return this.parent.right
+    }
+    return null
   }
 }
 
@@ -127,13 +150,13 @@ export class AVLNode<T> extends Node<T> implements IAVLNode<T> {
 }
 
 export interface IHeap<T> {
-  clear: ()=> void
-  add:(e:T)=> void
-  get:()=> T
-  remove:()=> void
-  replace:(e:T)=> void
-  size: ()=> number
-  isEmpty:()=> boolean
+  clear: () => void
+  add: (e: T) => void
+  get: () => T
+  remove: () => void
+  replace: (e: T) => void
+  size: () => number
+  isEmpty: () => boolean
 }
 
 export function TreeNode<T>(val: T, left?: INode<T>, right?: INode<T>) {
