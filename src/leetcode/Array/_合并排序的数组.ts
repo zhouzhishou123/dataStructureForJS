@@ -12,15 +12,17 @@
  * @return {void} Do not return anything, modify A in-place instead.
  */
 var merge = function (A: number[], m: number, B: number[], n: number): void {
-    if (A.length === 0 && B.length === 0) return
-    let ai = m - 1, bi = n - 1, i = m + n - 1
-    while (bi >= 0) {
-        if (ai >= 0 && A[ai] > B[bi]) {
-            A[i--] = A[ai--]
-        } else {
-            A[i--] = B[bi--]
-        }
+  if (A.length === 0 && B.length === 0) return;
+  let ai = m - 1,
+    bi = n - 1,
+    i = m + n - 1;
+  while (bi >= 0) {
+    if (ai >= 0 && A[ai] > B[bi]) {
+      A[i--] = A[ai--];
+    } else {
+      A[i--] = B[bi--];
     }
+  }
 };
 /**
  * 输入:
@@ -48,16 +50,17 @@ B = [2,5,6]
  */
 
 function indexOf(text: string, pattern: string) {
-    if (pattern === '') return -1
-    if (pattern.length > text.length) return -1
-    let plen = pattern.length, pi = 0
-    for (let ti = 0; ti < text.length - pattern.length; ti++) {
-        pi = 0
-        while (pi < plen) {
-            if (pattern[pi] !== text[pi + ti]) break
-            pi++
-        }
-        if (pi === plen) return ti
+  if (pattern === "") return -1;
+  if (pattern.length > text.length) return -1;
+  let plen = pattern.length,
+    pi = 0;
+  for (let ti = 0; ti < text.length - pattern.length; ti++) {
+    pi = 0;
+    while (pi < plen) {
+      if (pattern[pi] !== text[pi + ti]) break;
+      pi++;
     }
-    return -1
+    if (pi === plen) return ti;
+  }
+  return -1;
 }
