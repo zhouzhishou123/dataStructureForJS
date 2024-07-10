@@ -22,3 +22,21 @@ function conversionTree<T>(data: any[], index:number, root:T[]) {
     first.children = children ? children : []
     conversionTree(data, index + 1, root)
 }
+
+
+function list2tree(list){
+    let tree = []
+    list.forEach(outer=>{
+        if(!outer.pid){
+            tree.push(outer)
+        }
+       list.forEach(inner=>{
+        if(inner.pid === outer.id){
+            outer.children = outer.children || []
+            outer.children.push(inner)
+        }
+       })
+    })
+
+    return tree
+}
