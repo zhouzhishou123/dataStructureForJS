@@ -24,13 +24,14 @@ function conversionTree<T>(data: any[], index:number, root:T[]) {
 }
 
 
-function list2tree(list){
+export function list2tree(list){
     let tree = []
     list.forEach(outer=>{
         if(!outer.pid){
             tree.push(outer)
         }
        list.forEach(inner=>{
+        if(inner.id === outer.id) return;
         if(inner.pid === outer.id){
             outer.children = outer.children || []
             outer.children.push(inner)
