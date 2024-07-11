@@ -1,4 +1,4 @@
-// 暴力解法
+// 暴力解法 https://leetcode.cn/problems/longest-substring-without-repeating-characters/description/
 export function lengthOfLongestSubstring(s: string): number {
   if (s == null) return 0;
   if (s.length < 2) return s.length;
